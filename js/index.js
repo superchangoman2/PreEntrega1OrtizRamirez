@@ -9,28 +9,28 @@ class Vestido {
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
+    }
 
-        //Validación que verifica si se tiene suficiente inventario para la compra deseada
-        this.verificarInventario = (cantidaddeseada) => {
-            if(cantidaddeseada>this.cantidad){
-                alert("Lamentamos el inconveniente\nNo tenemos inventario suficiente");
-                return false;
-            }
-            else
-                return true;
+    //Validación que verifica si se tiene suficiente inventario para la compra deseada
+    verificarInventario = (cantidaddeseada) => {
+        if(cantidaddeseada>this.cantidad){
+            alert("Lamentamos el inconveniente\nNo tenemos inventario suficiente");
+            return false;
         }
+        else
+            return true;
+    }
 
-        //Al realizar la compra del producto, se saca de inventario la cantidad de prendas compradas
-        this.sacarDeInventario = (cantidad) => {
-            this.cantidad = this.cantidad-cantidad;
-        }
+    //Al realizar la compra del producto, se saca de inventario la cantidad de prendas compradas
+    sacarDeInventario = (cantidad) => {
+        this.cantidad = this.cantidad-cantidad;
+    }
 
-        this.busqueda = (nombre) => {
-            if(this.nombre.toUpperCase() == nombre.toUpperCase())
-                return true;
-            else
-                return false;
-        }
+    busqueda = (nombre) => {
+        if(this.nombre.toUpperCase() == nombre.toUpperCase())
+            return true;
+        else
+            return false;
     }
 }
 
