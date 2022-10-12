@@ -25,6 +25,12 @@ class Vestido {
             this.cantidad = this.cantidad-cantidad;
         }
 
+        this.busqueda = (nombre) => {
+            if(this.nombre.toUpperCase() == nombre.toUpperCase())
+                return true;
+            else
+                return false;
+        }
     }
 }
 
@@ -45,7 +51,7 @@ let validarMenu = (opcion) => {
     }
     else
     {
-        if(parseInt(opcion)<0 || parseInt(opcion)>(vestidos.length+1)){
+        if(parseInt(opcion)<0 || parseInt(opcion)>(vestidos.length+2)){
             alert("Opción Fuera de rango");
             return false;
         }
@@ -75,29 +81,54 @@ let comprarProductos = (opcion) => {
     }
 }
 
+let buscarProductos = () => {
+    let encontrado = false;
+    nombre=prompt("Ingresa el nombre de la prenda que deseas buscar(exactamente el nombre)");
+    for(const vestido of vestidos)
+    {
+        if(vestido.busqueda(nombre))
+            encontrado = true; 
+    }
+    return encontrado;
+}
+
 //Funcion principal donde se selecciona la prenda que se desea comprar
 let menu = () => {
-    let opcionmenu, resultadovalidacion, menuarmado="Selecciona los productos desde el siguiente menú";
+    let opcionmenu, resultadovalidacion, menuarmado, busqueda;
     alert("Bienvenid@ a la tienda de ropa Moda Katy");
 
     do{        
         //Armado de menú mostrado en prompt
+        menuarmado="Selecciona los productos desde el siguiente menú"
         for(const vestido of vestidos){
             menuarmado = `${menuarmado}
             ${vestido.id}) ${vestido.nombre} (Stock: ${vestido.cantidad})`
         }
         menuarmado=`${menuarmado}
-            ${vestidos.length+1}) Salir`
+            ${vestidos.length+1}) Buscar vestido
+            ${vestidos.length+2}) Salir`
         opcionmenu = prompt(`${menuarmado}`);
 
         resultadovalidacion = validarMenu(opcionmenu);
         console.log(resultadovalidacion);
-        if(resultadovalidacion && opcionmenu!=(vestidos.length+1))
+        if(resultadovalidacion)
         {
-            comprarProductos(parseInt(opcionmenu));
-            menuarmado="Selecciona los productos desde el siguiente menú"
+            if( opcionmenu!=(vestidos.length+1) && opcionmenu!=(vestidos.length+2))
+                comprarProductos(parseInt(opcionmenu));
+            // Opcion realiza busqueda de prenda
+            else{
+                if(opcionmenu==(vestidos.length+1))
+                {
+                    if(buscarProductos())
+                        alert(`Si manejamos este producto`);
+                    else
+                        alert(`No manejamos este producto`);  
+                }
+
+            }
         }
-    }while(opcionmenu!=(vestidos.length+1));
+
+    }while(opcionmenu!=(vestidos.length+2));
     alert(`Gracias por comprar en Moda Katy\nEl total de tu compra es de: $${totalCompra}\nVuelva Pronto`);
 }
 //Llamada de función principal
