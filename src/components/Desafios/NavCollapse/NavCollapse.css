@@ -1,0 +1,21 @@
+.navbar-nav-scroll a {
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-left: solid;
+}
+
+.navegacion a{
+    margin: 10px;
+
+}
+
+.claseActive{
+    color: red
+}
+.claseInactive{
+    color: rgb(255, 255, 255);
+}
